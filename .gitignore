@@ -25,4 +25,4 @@ yarn-error.log*
 
 /house-marketplace-resources*
 /__MACOSX
-./src/firebase.config.js
+/src/firebase.config.js
