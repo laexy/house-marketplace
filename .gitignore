@@ -27,3 +27,4 @@ yarn-error.log*
 /__MACOSX
 /src/firebase.config.js
 bfg-1.14.0.jar
+.env
