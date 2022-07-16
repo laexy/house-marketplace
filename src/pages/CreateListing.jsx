@@ -47,8 +47,8 @@ function CreateListing() {
     latitude,
     longitude,
   } = formData;
-  const auth = getAuth();
 
+  const auth = getAuth();
   const navigate = useNavigate();
   const isMounted = useRef(true);
 
@@ -86,7 +86,6 @@ function CreateListing() {
     }
 
     let geolocation = {};
-
     let location;
 
     if (geolocationEnabled) {
@@ -170,7 +169,7 @@ function CreateListing() {
       timestamp: serverTimestamp(),
     };
 
-    
+
     formDataCopy.location = address
     delete formDataCopy.images;
     delete formDataCopy.address;

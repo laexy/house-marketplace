@@ -1,20 +1,19 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
-import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/swiper-bundle.css';
+import 'swiper/css/bundle';
 import { getDoc, doc } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { db } from '../firebase.config';
 import Spinner from '../components/Spinner';
 import shareIcon from '../assets/svg/shareIcon.svg';
-SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
 function Listing() {
-  const { listing, setListing } = useState(null);
-  const { loading, setLoading } = useState(true);
-  const { shareLinkCopied, setShareLinkCopied } = useState(false);
+  const [listing, setListing] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [shareLinkCopied, setShareLinkCopied] = useState(false);
 
   const navigate = useNavigate();
   const params = useParams();
@@ -38,17 +37,24 @@ function Listing() {
 
   return (
     <main>
-      <Swiper slidesPerView={1} pagination={{ clickable: true }}>
+      <Swiper
+        modules={[Navigation, Pagination, Scrollbar, A11y]}
+        slidesPerView={1}
+        pagination={{ clickable: true }}
+      >
         {listing.imgUrls.map((url, index) => {
-          <SwiperSlide key={index}>
-            <div
-              style={{
-                background: `url(${listing.imgUrls[index]}) center no-repeat`,
-                backgroundSize: 'cover',
-              }}
-              className='swiperSlideDiv'
-            ></div>
-          </SwiperSlide>;
+          return (
+            <SwiperSlide key={index}>
+              <div
+                className='swiperSlideDiv'
+                style={{
+                  background: `url(${listing.imgUrls[index]}) center no-repeat`,
+                  backgroundSize: 'cover',
+                  padding: '150px',
+                }}
+              ></div>
+            </SwiperSlide>
+          );
         })}
       </Swiper>
 
@@ -64,6 +70,7 @@ function Listing() {
       >
         <img src={shareIcon} alt='' />
       </div>
+
       {shareLinkCopied && <p className='linkCopied'>Link Copied!</p>}
 
       <div className='listingDetails'>
@@ -83,7 +90,11 @@ function Listing() {
         </p>
         {listing.offer && (
           <p className='discountPrice'>
-            ${listing.regularPrice - listing.discountedPrice} discount
+            $
+            {(listing.regularPrice - listing.discountedPrice)
+              .toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' '}
+            discount
           </p>
         )}
 
