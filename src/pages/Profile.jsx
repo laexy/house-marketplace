@@ -106,6 +106,10 @@ function Profile() {
     }
   };
 
+  const onEdit = async (listingId) => {
+    navigate(`/edit-listing/${listingId}`);
+  };
+
   if (loading) return <Spinner />;
 
   return (
@@ -166,6 +170,7 @@ function Profile() {
                   listing={listing.data}
                   id={listing.id}
                   onDelete={() => onDelete(listing.id)}
+                  onEdit={() => onEdit(listing.id)}
                 />
               ))}
             </ul>
