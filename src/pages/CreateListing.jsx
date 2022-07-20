@@ -14,6 +14,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Spinner from '../components/Spinner';
 
 function CreateListing() {
+  // eslint-disable-next-line
   const [geolocationEnabled, setGeoLocationEnabled] = useState(true);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -169,8 +170,7 @@ function CreateListing() {
       timestamp: serverTimestamp(),
     };
 
-
-    formDataCopy.location = address
+    formDataCopy.location = address;
     delete formDataCopy.images;
     delete formDataCopy.address;
     !formDataCopy.offer && delete formDataCopy.discountedPrice;

@@ -19,6 +19,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Spinner from '../components/Spinner';
 
 function EditListing() {
+  // eslint-disable-next-line
   const [geolocationEnabled, setGeoLocationEnabled] = useState(true);
   const [loading, setLoading] = useState(false);
   const [listing, setListing] = useState(false);
@@ -209,7 +210,6 @@ function EditListing() {
     delete formDataCopy.images;
     delete formDataCopy.address;
     !formDataCopy.offer && delete formDataCopy.discountedPrice;
-
 
     // Update listing
     const docRef = doc(db, 'listings', params.listingId);
